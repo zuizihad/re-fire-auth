@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../contants/routes'
 const Navigation = () => {
     return (
-        <div>
-            <ul>
+        <nav className=" material indigo darken-2 ">
+        <div className="nav-wrapper nav-extended navbar-fixed">
+            <ul className="right hide-on-med-and-down">
                 <li>
                     <Link to={ROUTES.SIGNIN}>SIgn In</Link> 
                 </li>
@@ -22,6 +23,7 @@ const Navigation = () => {
                 </li>
             </ul>
         </div>
+        </nav>
     )
 }
 
