@@ -2,7 +2,7 @@ import React from 'react';
  
 const index = () => (
   <div>
-    <h1>Sign In</h1>
+    <h1>Forget Password</h1>
   </div>
 );
  
