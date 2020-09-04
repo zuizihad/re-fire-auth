@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import * as ROUTES from '../contants/routes'
-
-
+import { withFirebase } from '../Firebase'
+import { compose } from 'recompose'
 const SignUpPage = () => (
   <div>
-    <h1>Sign Up</h1>
+    <SignUpForm/>
   </div>
 );
  
@@ -20,13 +20,24 @@ const INITIAL_STATE = {
 
 
 
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE }
   }
   onSubmit = event =>{
+    const { username, email, passwordOne } = this.state;
+    this.props.firebase
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then(authUser => {
+        this.setState({ ...INITIAL_STATE })
+        this.props.history.push(ROUTES.HOME)
+      })
+      .catch(error => {
+        this.setState({error})
+      })
 
+      event.preventDefault();
   }
 
   onChange = event => {
@@ -37,17 +48,16 @@ class SignUpForm extends Component {
 
     const isInvalid =
       passwordOne !== passwordTwo ||
-      passwordOne ===''
-      email ===''
+      passwordOne ===''||
+      email ===''||
       username ==='';
 
     return(
       <form onSubmit={this.onSubmit}>
-          <>
   <div className="row">
   <div className="col l3"></div>
   <div className="col s12 l6 center">
-  <h3 className="header">Sign In</h3>
+  <h3 className="header">Sign Up</h3>
   <div className="card hoverable">
     <div className="card-stacked">
       <div className="card-content">
@@ -58,7 +68,6 @@ class SignUpForm extends Component {
           value={username}
           onChange={this.onChange}
           type="text"
-          placeholder="User Name"
         />
           <label htmlFor="username">User Name</label>
         </div>
@@ -69,7 +78,6 @@ class SignUpForm extends Component {
           value={email}
           onChange={this.onChange}
           type="email"
-          placeholder="Email Address"
         />
           <label htmlFor="email">Email</label>
         </div>
@@ -83,7 +91,6 @@ class SignUpForm extends Component {
           value={passwordOne}
           onChange={this.onChange}
           type="password"
-          placeholder="Password"
         />
           <label htmlFor="passwordOne">Password</label>
         </div>
@@ -94,7 +101,6 @@ class SignUpForm extends Component {
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
-          placeholder="Confirm Password"
         />
           <label htmlFor="passwordTwo">Password</label>
         </div>
@@ -102,27 +108,28 @@ class SignUpForm extends Component {
 
 
       <div className="card-action">
-      <a className="waves-effect waves-light btn material indigo" disable={isInvalid} type="submit">Sign Up</a>
+      <button className="waves-effect waves-light btn material indigo" disabled={isInvalid} type="submit">Sign Up</button>
       { error && <p>{error.message}</p> }
-      <h6>Forgot Password???</h6>
+      
       </div>
     </div>
   </div>
 </div>
 <div className="col l3">
-
 </div>
 </div>
-
-  </>
       </form>
     )
   }
 }
 
-const SignUpLink = () => {
-  <p>Don't have an account? <Link to={ROUTES.SIGNUP}>Sign Up</Link></p>
-}
+const SignUpLink = () => (
+  <p>
+    Don't have an account? <Link to={ROUTES.SIGNUP}>Sign Up</Link>
+  </p>
+);
+
+const SignUpForm =compose(withRouter, withFirebase,)(SignUpFormBase)
 
 export default SignUpPage
 
