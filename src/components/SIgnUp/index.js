@@ -6,6 +6,7 @@ import { compose } from 'recompose'
 const SignUpPage = () => (
   <div>
     <SignUpForm/>
+    <SignUpLink/>
   </div>
 );
  
@@ -54,78 +55,75 @@ class SignUpFormBase extends Component {
 
     return(
       <form onSubmit={this.onSubmit}>
-  <div className="row">
-  <div className="col l3"></div>
-  <div className="col s12 l6 center">
-  <h3 className="header">Sign Up</h3>
-  <div className="card hoverable">
-    <div className="card-stacked">
-      <div className="card-content">
-      <div className="input-field">
-      <i className="material-icons prefix">account_circle</i>
-          <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-        />
-          <label htmlFor="username">User Name</label>
-        </div>
-        <div className="input-field">
-        <i className="material-icons prefix">email</i>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="email"
-        />
-          <label htmlFor="email">Email</label>
-        </div>
-      </div>
+        <div className="row">
+          <div className="col l3"></div>
+            <div className="col s12 l6 center">
+              <h3 className="header">Sign Up</h3>
+                <div className="card hoverable">
+                  <div className="card-stacked">
+                    <div className="card-content">
+                      <div className="input-field">
+                        <i className="material-icons prefix">account_circle</i>
+                          <input
+                          name="username"
+                          value={username}
+                          onChange={this.onChange}
+                          type="text"
+                          />
+                        <label htmlFor="username">User Name</label>
+                      </div>
+                    <div className="input-field">
+                      <i className="material-icons prefix">email</i>
+                        <input
+                        name="email"
+                        value={email}
+                        onChange={this.onChange}
+                        type="email"
+                        />
+                      <label htmlFor="email">Email</label>
+                    </div>
+                  </div>
 
-      <div className="card-content">
-      <div className="input-field">
-      <i className="material-icons prefix">lock</i>
-          <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-        />
-          <label htmlFor="passwordOne">Password</label>
-        </div>
-        <div className="input-field">
-        <i className="material-icons prefix">lock</i>
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-        />
-          <label htmlFor="passwordTwo">Password</label>
-        </div>
-      </div>
+                <div className="card-content">
+                  <div className="input-field">
+                    <i className="material-icons prefix">lock</i>
+                      <input
+                      name="passwordOne"
+                      value={passwordOne}
+                      onChange={this.onChange}
+                      type="password"
+                      />
+                    <label htmlFor="passwordOne">Password</label>
+                  </div>
+                <div className="input-field">
+                  <i className="material-icons prefix">lock</i>
+                    <input
+                      name="passwordTwo"
+                      value={passwordTwo}
+                      onChange={this.onChange}
+                      type="password"
+                    />
+                  <label htmlFor="passwordTwo">Password</label>
+                </div>
+              </div>
 
-
-      <div className="card-action">
-      <button className="waves-effect waves-light btn material indigo" disabled={isInvalid} type="submit">Sign Up</button>
-      { error && <p>{error.message}</p> }
-      
+              <div className="card-action">
+                <button className="waves-effect waves-light btn material indigo" disabled={isInvalid} type="submit">Sign Up</button>
+                  { error && <p>{error.message}</p> }     
+              </div>
+            </div>
+          </div>
+        </div>
+      <div className="col l3">
       </div>
     </div>
-  </div>
-</div>
-<div className="col l3">
-</div>
-</div>
-      </form>
-    )
-  }
+  </form>
+)}
 }
 
 const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGNUP}>Sign Up</Link>
+  <p className="center">
+    Wanna Log in? <Link to={ROUTES.SIGNIN}>Sign In</Link>
   </p>
 );
 
