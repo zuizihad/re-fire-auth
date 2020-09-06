@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom'
 import * as ROUTES from '../contants/routes'
 import SignOutButton from '../SignOut'
 import { auth } from 'firebase'
-
-const Navigation = ({ authUser }) => (
-    <div>{authUser ? <NavigationAuth/> : <NavigationNonAuth/>}</div>
+import { AuthUserContext } from '../Session'
+const Navigation = () => (
+    <div>
+        <AuthUserContext.Consumer>
+            {authUser => authUser ? <NavigationAuth/> : <NavigationNonAuth/>}
+        </AuthUserContext.Consumer>
+    </div>
 )
 
 const NavigationAuth = () => (

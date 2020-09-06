@@ -76,7 +76,7 @@ class SignInFormBase extends Component {
                     </div>
                   </div>
                   <div className="card-action">
-                    <button className="waves-effect waves-light btn material indigo" disabled={isInvalid} type="submit">Sign Up</button>
+                    <button className="waves-effect waves-light btn material indigo" disabled={isInvalid} type="submit">Sign In</button>
                       { error && <p>{error.message}</p> }     
                   </div>
                 </div>
