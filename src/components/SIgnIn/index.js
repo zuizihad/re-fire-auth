@@ -3,11 +3,11 @@ import { Link, withRouter } from 'react-router-dom'
 import * as ROUTES from '../contants/routes'
 import { withFirebase } from '../Firebase'
 import { compose } from 'recompose'
-import { PasswordForgotLink } from '../PasswordForget'
+import { PasswordForgetLink } from '../PasswordForget'
 const SignInPage = () => (
   <div>
     <SignInForm/>
-    <PasswordForgotLink/>
+    <PasswordForgetLink/>
     <SignInLink/>
   </div>
 );
