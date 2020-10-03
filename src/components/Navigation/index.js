@@ -1,18 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import * as ROUTES from '../contants/routes'
+import * as ROLES from '../contants/roles'
 import SignOutButton from '../SignOut'
 import { auth } from 'firebase'
 import { AuthUserContext } from '../Session'
 const Navigation = () => (
     <div>
         <AuthUserContext.Consumer>
-            {authUser => authUser ? <NavigationAuth/> : <NavigationNonAuth/>}
+            {authUser => 
+            authUser ? (
+            <NavigationAuth authUser={authUser}/>
+            ) : (
+                <NavigationNonAuth/>
+            )
+            }
         </AuthUserContext.Consumer>
     </div>
 )
 
-const NavigationAuth = () => (
+const NavigationAuth = ({ authUser }) => (
     <nav className=" material indigo darken-2 ">
     <div className="nav-wrapper nav-extended navbar-fixed">
         <ul className="right hide-on-med-and-down">
@@ -25,9 +32,9 @@ const NavigationAuth = () => (
             <li>
                 <Link to={ROUTES.ACCOUNT}>Account</Link>
             </li>
-            <li>
-                <Link to={ROUTES.ADMIN}>Admin</Link>
-            </li>
+            {!!authUser.roles[ROLES.ADMIN] && (
+                <li><Link to={ROUTES.ADMIN}>Admin</Link></li>
+            )}                   
             <li>
                 <SignOutButton/>
             </li>

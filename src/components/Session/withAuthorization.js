@@ -41,4 +41,4 @@ return compose(
    
 }
 
-export default withAuthorization
+export default withAuthorization;

@@ -124,16 +124,20 @@ class SignUpFormBase extends Component {
                     />
                   <label htmlFor="passwordTwo">Password</label>
                 </div>
-              </div>
-              <label>
-                Admin:
+                <p>
+            <label>
+                
                 <input 
                   name="isAdmin"
                   type="checkbox"
                   checked={isAdmin}
                   onChange={this.onChangeCheckbox}
                 />
+                <span>Admin</span>
               </label>
+            </p>
+              </div>
+
               <div className="card-action">
                 <button className="waves-effect waves-light btn material indigo" disabled={isInvalid} type="submit">Sign Up</button>
                   { error && <p>{error.message}</p> }     
