@@ -19,6 +19,7 @@ class Firebase {
         this.db = app.database();
         this.googleProvider = new app.auth.GoogleAuthProvider();
         this.facebookProvider = new app.auth.FacebookAuthProvider();
+        this.twitterProvider = new app.auth.TwitterAuthProvider();
     }
      // Auth API // 
     doCreateUserWithEmailAndPassword = (email, password) =>
@@ -29,10 +30,12 @@ class Firebase {
   
     doSignInWithGoogle = () =>
     this.auth.signInWithPopup(this.googleProvider);
-    
+
     doSignInWithFacebook = () =>
     this.auth.signInWithPopup(this.facebookProvider);
-
+    doSignInWithTwitter = () =>
+    this.auth.signInWithPopup(this.twitterProvider);
+    
     doSignOut = () => this.auth.signOut();
   
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
