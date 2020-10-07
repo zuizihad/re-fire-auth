@@ -1,5 +1,7 @@
 import React from 'react';
-import { withAuthentication, withAuthorization } from '../Session'
+import { compose } from 'recompose';
+
+import { withEmailVerification, withAuthorization } from '../Session'
 const HomePage = () => (
   <div>
     <h1>Home Page</h1>
@@ -8,4 +10,7 @@ const HomePage = () => (
 );
 
 const condition = authUser => !!authUser
-export default withAuthorization(condition)(HomePage)
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(HomePage);

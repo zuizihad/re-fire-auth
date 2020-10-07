@@ -1,8 +1,9 @@
 import React from 'react';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
-import { withAuthorization, AuthUserContext } from '../Session'
+import { withAuthorization, AuthUserContext,  withEmailVerification} from '../Session'
 import { withFirebase } from '../Firebase'
+import { compose } from 'recompose';
 
 const SIGN_IN_METHODS = [
   {
@@ -216,4 +217,7 @@ class DefaultLoginToggle extends React.Component {
 
 const condition = authUser => !!authUser
 const LoginManagement = withFirebase(LoginManagementBase);
-export default withAuthorization(condition)(AccountPage)
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(AccountPage)

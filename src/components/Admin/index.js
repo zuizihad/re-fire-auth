@@ -1,7 +1,7 @@
 import React ,{Component} from 'react';
 import { withFirebase } from '../Firebase'
 import { compose } from 'recompose'
-import { withAuthorization } from '../Session'
+import { withAuthorization, withEmailVerification  } from '../Session'
 import * as ROLES from '../contants/roles'
 
 class AdminPage extends Component {
@@ -70,6 +70,7 @@ const condition = autUser =>
     autUser && !!autUser.roles[ROLES.ADMIN];
 
 export default compose(
+  withEmailVerification,
   withAuthorization(condition),
   withFirebase,
 )(AdminPage);

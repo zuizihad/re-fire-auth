@@ -36,7 +36,13 @@ class Firebase {
     this.auth.signInWithPopup(this.facebookProvider);
     doSignInWithTwitter = () =>
     this.auth.signInWithPopup(this.twitterProvider);
-    
+
+    doSendEmailVerification = () =>
+    this.auth.currentUser.sendEmailVerification({
+      //url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+      url: 'http://localhost:3000'
+    });
+
     doSignOut = () => this.auth.signOut();
   
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
@@ -62,6 +68,8 @@ class Firebase {
               authUser = {
                 uid: authUser.uid,
                 email: authUser.email,
+                emailVerified: authUser.emailVerified,
+                providerData: authUser.providerData,
                 ...dbUser,
               }
               next(authUser);
